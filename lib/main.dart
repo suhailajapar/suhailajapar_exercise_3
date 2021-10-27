@@ -60,45 +60,73 @@ class MyApp extends StatelessWidget {
                 obscureText: true,
                 decoration: InputDecoration(
                     labelText: 'Password',
-                    border: OutlineInputBorder()
+                  border: OutlineInputBorder()
                 ),
               ),
             ),
             Container(
               padding: EdgeInsets.fromLTRB(10, 10, 10, 0),
               width: 400,
-              child: DropdownButton<String>(
-                hint: Text('Select your gender'),
-                items: <String>['Male', 'Female', 'Other', 'Rather not to say'].map((String value){
-                  return DropdownMenuItem<String>(
-                    value:value,
-                    child: Text(value),
-                  );
-                }).toList(),
-                onChanged: (_){},
-              ),
+              child: DropDownList(),
             ),
             Container(
               height: 50,
               padding: EdgeInsets.fromLTRB(10, 10, 10, 0),
-              child: ElevatedButton(
+              child: Builder(builder: (context) => ElevatedButton(
                 //textColor: Colors.white,
                 //color: Colors.purple,
-                child: Text(
+                  onPressed: () {
+                    final snackBar = SnackBar(
+                        content: Text('You have signed up successfully')
+                    );
+                    ScaffoldMessenger.of(context).showSnackBar(snackBar);
+                  },
+                  child: Text(
                     'Sign up',
-                  style: TextStyle(fontWeight: FontWeight.bold),
-                ),
-                onPressed: () {
-                  final snackBar = SnackBar(
-                    content: const Text('You have signed up successfully'),
-                  );
-                  ScaffoldMessenger.of(context).showSnackBar(snackBar);
-                },
+                    style: TextStyle(fontWeight: FontWeight.bold),
+                  )
               ),
+              )
             )
           ],
         ),
       ),
+    );
+  }
+}
+
+//For Dropdown menu
+class DropDownList extends StatefulWidget {
+
+  @override
+  _DropDownListState createState() => _DropDownListState();
+}
+
+class _DropDownListState extends State<DropDownList> {
+  var chosenGender;
+
+  @override
+  Widget build(BuildContext context) {
+    return DropdownButton<String>(
+      value: chosenGender,
+      icon: Icon(Icons.keyboard_arrow_down_rounded),
+      hint: Text('Select your gender'),
+      items: <String>[
+        'Male',
+        'Female',
+        'Other',
+        'Rather not to say'
+      ].map<DropdownMenuItem<String>>((String value) {
+        return DropdownMenuItem<String>(
+          value: value,
+          child: Text(value),
+        );
+      }).toList(),
+      onChanged: (String? value) {
+        setState(() {
+          chosenGender = value;
+        });
+      },
     );
   }
 }
