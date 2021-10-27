@@ -99,7 +99,7 @@ class FormInputState extends State<FormInput> {
                   }
                 },
                 child: const Text(
-                    'Sign Up',
+                    'Sign up now',
                   style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
                 ),
               ),
