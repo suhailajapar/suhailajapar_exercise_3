@@ -15,11 +15,25 @@ class FormInput extends StatefulWidget {
 // This class holds data related to the form.
 class FormInputState extends State<FormInput> {
   final _formKey = GlobalKey<FormState>();
+  bool _btnEnabled = false;
+
+  _doSomething () {
+    ScaffoldMessenger.of(context).showSnackBar(
+                      const SnackBar(
+                        content: Text(
+                          'Yay! sign up successful.',
+                          style: TextStyle(fontSize: 18),
+                          textAlign: TextAlign.center,
+                          )
+                        ),
+                    );
+  }
 
   @override
   Widget build(BuildContext context) {
     return Form(
       key: _formKey,
+      onChanged: () => setState(() => _btnEnabled = _formKey.currentState!.validate()),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
@@ -89,19 +103,7 @@ class FormInputState extends State<FormInput> {
                     fixedSize: Size(200, 40),
                   primary: Colors.purple
                 ),
-                onPressed: () {
-                  if (_formKey.currentState!.validate()) {
-                    ScaffoldMessenger.of(context).showSnackBar(
-                      const SnackBar(
-                        content: Text(
-                          'Yay! sign up successful.',
-                          style: TextStyle(fontSize: 18),
-                          textAlign: TextAlign.center,
-                          )
-                        ),
-                    );
-                  } 
-                },
+                onPressed: _btnEnabled ? () => _doSomething() : null,
                 child: const Text(
                     'Sign up now',
                   style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
