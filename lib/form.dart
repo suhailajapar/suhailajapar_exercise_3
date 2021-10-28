@@ -14,6 +14,7 @@ class FormInput extends StatefulWidget {
 
 // This class holds data related to the form.
 class FormInputState extends State<FormInput> {
+  
   final _formKey = GlobalKey<FormState>();
 
   @override
@@ -51,6 +52,9 @@ class FormInputState extends State<FormInput> {
               validator: (value) {
                 if (value == null || value.isEmpty) {
                   return 'Email required';
+                } else if (!RegExp(r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+")
+                    .hasMatch(value)) {
+                      return 'Valid email required';
                 }
                 return null;
               },
@@ -90,13 +94,13 @@ class FormInputState extends State<FormInput> {
                     ScaffoldMessenger.of(context).showSnackBar(
                       const SnackBar(
                         content: Text(
-                          'Yay! signed up successful.',
+                          'Yay! sign up successful.',
                           style: TextStyle(fontSize: 18),
                           textAlign: TextAlign.center,
                           )
                         ),
                     );
-                  }
+                  } 
                 },
                 child: const Text(
                     'Sign up now',
