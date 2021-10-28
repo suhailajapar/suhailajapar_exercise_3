@@ -14,7 +14,6 @@ class FormInput extends StatefulWidget {
 
 // This class holds data related to the form.
 class FormInputState extends State<FormInput> {
-  
   final _formKey = GlobalKey<FormState>();
 
   @override
@@ -47,7 +46,8 @@ class FormInputState extends State<FormInput> {
               decoration: InputDecoration(
                 isDense: true,
                   border: OutlineInputBorder(),
-                  labelText: 'Email'
+                  labelText: 'Email',
+                  hintText: 'e.g. johndoe@gmail.com'
               ),
               validator: (value) {
                 if (value == null || value.isEmpty) {
