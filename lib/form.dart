@@ -1,6 +1,7 @@
 
 import 'package:flutter/material.dart';
 import './dropdown.dart';
+import './homepage.dart';
 
 // For Form field
 class FormInput extends StatefulWidget {
@@ -17,7 +18,7 @@ class FormInputState extends State<FormInput> {
   final _formKey = GlobalKey<FormState>();
   bool _btnEnabled = false;
 
-  _doSomething () {
+  /* doSomething () {
     ScaffoldMessenger.of(context).showSnackBar(
                       const SnackBar(
                         content: Text(
@@ -27,7 +28,7 @@ class FormInputState extends State<FormInput> {
                           )
                         ),
                     );
-  }
+  } */
 
   @override
   Widget build(BuildContext context) {
@@ -103,7 +104,11 @@ class FormInputState extends State<FormInput> {
                     fixedSize: Size(200, 40),
                   primary: Colors.purple
                 ),
-                onPressed: _btnEnabled ? () => _doSomething() : null,
+                //onPressed: _btnEnabled ? () => _doSomething() : null,
+                onPressed: _btnEnabled ? () {
+                  Navigator.of(context).push(MaterialPageRoute(
+                              builder: (context) => MyHomePage()));
+                }: null,
                 child: const Text(
                     'Sign up now',
                   style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
